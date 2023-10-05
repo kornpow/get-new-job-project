@@ -3,6 +3,10 @@ resource "aws_security_group" "cluster_internal" {
   name        = "cluster_internal traffic"
   description = "Allow cluster_internal traffic"
   vpc_id      = var.vpc_id
+
+  tags = {
+    Name = "cluster-internal"
+  }
 }
 
 resource "aws_security_group_rule" "traefik_dashboard" {
@@ -19,6 +23,10 @@ resource "aws_security_group" "dev_access" {
   name        = "dev_access traffic"
   description = "Allow dev_access traffic"
   vpc_id      = var.vpc_id
+
+  tags = {
+    Name = "dev-access"
+  }
 }
 
 resource "aws_security_group_rule" "dev_home_ssh" {
@@ -36,6 +44,10 @@ resource "aws_security_group" "traefik_ingress" {
   name        = "traefik_ingress"
   description = "Allow traefik_ingress traffic"
   vpc_id      = var.vpc_id
+
+  tags = {
+    Name = "internet-to-traefik"
+  }
 }
 
 resource "aws_security_group_rule" "allow_http" {
