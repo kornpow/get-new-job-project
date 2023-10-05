@@ -13,6 +13,10 @@ resource "aws_instance" "cluster_server" {
     device_index         = 0
   }
 
+  root_block_device {
+    volume_type = "gp3"
+  }
+
   key_name  = var.ssh_key_name
   user_data = data.template_file.user_data.rendered
   user_data_replace_on_change = true
@@ -24,7 +28,7 @@ resource "aws_instance" "cluster_server" {
 
 resource "aws_network_interface" "server" {
   subnet_id       = random_shuffle.random_subnet.result[0]
-  security_groups = ["sg-0046a51e5745b40ec", "sg-025f453a68409864c"]
+  security_groups = ["sg-0046a51e5745b40ec", "sg-025f453a68409864c", "sg-006a9892ca0aaa430"]
 }
 
 # # elastic ip

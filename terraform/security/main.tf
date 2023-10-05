@@ -67,3 +67,23 @@ resource "aws_security_group_rule" "allow_https" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.traefik_ingress.id
 }
+
+
+resource "aws_security_group" "internet_access" {
+  name        = "internet_access"
+  description = "Allow egress internet_access traffic"
+  vpc_id      = var.vpc_id
+
+  tags = {
+    Name = "internet-access"
+  }
+}
+
+resource "aws_security_group_rule" "internet_access_everywhere" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.internet_access.id
+}
