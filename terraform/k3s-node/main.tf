@@ -18,8 +18,9 @@ resource "aws_instance" "cluster_server" {
   }
 
   key_name  = var.ssh_key_name
-  user_data = data.template_file.user_data.rendered
+  user_data = trimspace(data.template_file.user_data.rendered)
   user_data_replace_on_change = true
+  iam_instance_profile = "cluster_instance_profile"
 
   tags = {
     Name = "cluster-server"

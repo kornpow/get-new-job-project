@@ -87,3 +87,30 @@ resource "aws_security_group_rule" "internet_access_everywhere" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.internet_access.id
 }
+
+resource "aws_iam_role" "cluster_instance_role" {
+  name = "cluster_instance_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_ssm_readonly_access" {
+  role       = aws_iam_role.cluster_instance_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
+}
+
+resource "aws_iam_instance_profile" "cluster_instance_profile" {
+  name = "cluster_instance_profile"
+  role = aws_iam_role.cluster_instance_role.name
+}
