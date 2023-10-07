@@ -29,7 +29,7 @@ resource "aws_instance" "cluster_server" {
 
 resource "aws_network_interface" "server" {
   subnet_id       = random_shuffle.random_subnet.result[0]
-  security_groups = ["sg-0046a51e5745b40ec", "sg-025f453a68409864c", "sg-006a9892ca0aaa430"]
+  security_groups = ["sg-0046a51e5745b40ec", "sg-025f453a68409864c", "sg-006a9892ca0aaa430", "sg-010da49623a7d11a9"]
 }
 
 # # elastic ip

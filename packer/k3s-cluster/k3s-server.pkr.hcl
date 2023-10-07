@@ -29,7 +29,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo apt-get update",
-      "sudo apt-get install -y curl unzip",
+      "sudo apt-get install -y wireguard curl unzip",
       "curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE='644' INSTALL_K3S_EXEC='server' sh -s -",
       "wget https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_arm64.tar.gz && tar xzvf k9s_Linux_arm64.tar.gz && sudo mv k9s /usr/local/bin/",
       "echo 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml' >> ~/.bashrc",
