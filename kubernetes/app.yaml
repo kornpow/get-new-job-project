@@ -16,7 +16,7 @@ spec:
         app: nginx
     spec:
       nodeSelector:
-        instance: internal
+        instance: home
       containers:
       - name: nginx
         image: nginx:1.21
@@ -63,7 +63,7 @@ spec:
         app: snake
     spec:
       nodeSelector:
-        instance: internal
+        instance: home
       containers:
       - name: snake
         image: public.ecr.aws/i9m8a4n0/cycle-snake:latest
