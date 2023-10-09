@@ -2,46 +2,48 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: resume
   labels:
-    app: nginx
+    app: resume
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: resume
   template:
     metadata:
       labels:
-        app: nginx
+        app: resume
     spec:
       nodeSelector:
         instance: home
       containers:
-      - name: nginx
-        image: nginx:1.21
+      - name: resume
+        image: 190928636648.dkr.ecr.us-west-2.amazonaws.com/resume:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8000
           name: http
         volumeMounts:
-        - name: nginx-config-volume
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
+        - name: resume-markdown
+          mountPath: /home/appuser/RESUME.md
+          subPath: RESUME.md
+      imagePullSecrets:
+      - name: aws-registry
       volumes:
-      - name: nginx-config-volume
+      - name: resume-markdown
         configMap:
-          name: nginx-config
+          name: resume-markdown
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: resume-service
 spec:
   selector:
-    app: nginx
+    app: resume
   ports:
   - name: http
-    port: 80
+    port: 8000
     protocol: TCP
     targetPort: http
 
@@ -150,26 +152,26 @@ spec:
   #   - samkorn.me
   #   secretName: xyz-app-tls
   rules:
-  - host: samkorn.xyz
-    http:
-      paths:
-      - path: /
-        pathType: Exact
-        backend:
-          service:
-            name: nginx-service
-            port:
-              number: 80
   - host: samkorn.me
     http:
-      paths:         
+      paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: snake-service
+            name: resume-service
             port:
-              number: 3000
+              number: 8000
+  # - host: samkorn.me
+  #   http:
+  #     paths:         
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: snake-service
+  #           port:
+  #             number: 3000
   - host: samkorn.xyz
     http:
       paths:         

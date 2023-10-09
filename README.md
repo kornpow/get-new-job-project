@@ -13,6 +13,10 @@
 kubectl create configmap nginx-config --from-file=nginx.conf
 ```
 
+```
+kubectl delete configmap resume-markdown
+kubectl create configmap resume-markdown --from-file=RESUME.md
+```
 
 
 # Resources
