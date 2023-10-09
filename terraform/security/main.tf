@@ -29,7 +29,7 @@ resource "aws_security_group" "dev_access" {
   }
 }
 
-resource "aws_security_group_rule" "dev_home_ssh" {
+resource "aws_security_group_rule" "dev_home_fullaccess" {
   type              = "ingress"
   from_port         = 0
   to_port           = 65535
