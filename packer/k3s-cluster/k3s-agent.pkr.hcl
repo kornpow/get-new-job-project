@@ -9,7 +9,7 @@ source "amazon-ebs" "example" {
     owners      = ["099720109477"]
     most_recent = true
   }
-  instance_type = "t4g.small"
+  instance_type = "t4g.medium"
   ssh_username  = "ubuntu"
   ami_name      = "k3s-node-${local.timestamp}"
 }
@@ -30,7 +30,9 @@ build {
     inline = [
       "sudo apt-get update",
       "sudo apt-get install -y curl",
-      "curl -sfL https://get.k3s.io | sh -s -"
+      "curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="agent" sh -s -"
+      # configure config.yaml
+      # configure k3s.service.env
     ]
   }
 }

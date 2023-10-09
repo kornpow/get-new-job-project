@@ -16,7 +16,7 @@ spec:
         app: nginx
     spec:
       nodeSelector:
-        instance: internal
+        instance: home
       containers:
       - name: nginx
         image: nginx:1.21
@@ -63,7 +63,7 @@ spec:
         app: snake
     spec:
       nodeSelector:
-        instance: internal
+        instance: home
       containers:
       - name: snake
         image: public.ecr.aws/i9m8a4n0/cycle-snake:latest
@@ -84,19 +84,71 @@ spec:
       port: 3000
       targetPort: 3000  # Adjust this to the port your snake pod listens on
 ---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: label
+  labels:
+    app: label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: label
+  template:
+    metadata:
+      labels:
+        app: label
+    spec:
+      nodeSelector:
+        instance: home
+      containers:
+      - name: label
+        image: 190928636648.dkr.ecr.us-west-2.amazonaws.com/label-printer:latest
+        ports:
+        - containerPort: 8080
+          name: app
+        volumeMounts:
+        - name: usb-lp0
+          mountPath: /dev/usb/lp0
+        securityContext:
+          privileged: true
+      imagePullSecrets:
+      - name: aws-registry
+
+      volumes:
+      - name: usb-lp0
+        hostPath:
+          path: /dev/usb/lp0
+          type: CharDevice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: label-service
+spec:
+  selector:
+    app: label
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080  # Adjust this to the port your snake pod listens on
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx
-  annotations:
-    cert-manager.io/issuer: "letsencrypt-prod"
+  name: app
+  # annotations:
+  #   cert-manager.io/issuer: "letsencrypt-staging"
 spec:
   ingressClassName: "traefik"
-  tls:
-  - hosts:
-    - samkorn.xyz
-    - samkorn.me
-    secretName: quickstart-example-tls
+  # tls:
+  # - hosts:
+  #   - samkorn.xyz
+  #   - samkorn.me
+  #   secretName: xyz-app-tls
   rules:
   - host: samkorn.xyz
     http:
@@ -118,3 +170,13 @@ spec:
             name: snake-service
             port:
               number: 3000
+  - host: samkorn.xyz
+    http:
+      paths:         
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: label-service
+            port:
+              number: 8080
