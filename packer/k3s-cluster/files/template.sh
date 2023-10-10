@@ -10,3 +10,7 @@ envsubst < template.txt > /etc/rancher/k3s/config.yaml
 
 # Save the latest server public IP to SSM so the agents can use it for their configs
 aws ssm put-parameter --name /cluster/config/server_public_ip --value $SERVER_PUBLIC_IP --overwrite --type String
+
+
+# TODO: get cluster token and put into SSM
+# sudo cat /var/lib/rancher/k3s/server/token
