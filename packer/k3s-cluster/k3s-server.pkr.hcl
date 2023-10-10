@@ -36,6 +36,7 @@ build {
       "curl 'https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip' -o 'awscliv2.zip'",
       "unzip awscliv2.zip",
       "sudo ./aws/install",
+      "curl -fsSL https://tailscale.com/install.sh | sh"
       # "curl -Lo /usr/local/bin/k3s https://github.com/k3s-io/k3s/releases/download/v1.26.5+k3s1/k3s; chmod a+x /usr/local/bin/k3s"
     ]
   }

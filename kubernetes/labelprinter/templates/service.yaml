@@ -7,9 +7,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: 80
+      targetPort: 8080
       protocol: TCP
-      name: http
   selector:
     {{- include "labelprinter.selectorLabels" . | nindent 4 }}
