@@ -5,7 +5,15 @@
 
 ### Install application into cluster
 ```bash
-    kubectl apply -f app.yaml
+    # install resume app
+    cd kubernetes/resume
+    helm upgrade --install resume .
+```
+
+```bash
+    # install labelprinter app
+    cd kubernetes/labelprinter
+    helm upgrade --install labelprinter .
 ```
 
 ### Create config secrets
