@@ -74,5 +74,5 @@ A MicroPython + hardware project, which communicates to a temperature and humidi
 
 - Open-source contribution: Testing various Bitcoin/Lightning Network tools and creating issues, talking to developers, etc.
 - Health/Fitness: Hiking, running, lifting, keto diet, and outdoor activities
-- Self-sufficency: Gourmet Mushroom growing, gardening, soap making
+- Self-sufficiency: Gourmet Mushroom growing, gardening, soap making
 
