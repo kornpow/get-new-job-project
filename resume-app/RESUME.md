@@ -10,14 +10,13 @@
 
 ## Summary
 
-_TODO: Fill me out_
+A very motivated engineer, looking to join a team of good people making products/services that  matter.
 
 ---
 
 ## Education
 
-### Major: Electrical and Computer Engineering
-### Minor: Computer Science
+### Electrical and Computer Engineering W/ Computer Science Minor
 
 **University of Colorado** - Boulder, CO  
 *August 2012 - May 2016*
@@ -30,15 +29,17 @@ _TODO: Fill me out_
 *Sept 2021 - Oct 2023*
 
 - Created a Lightning Service Provider tool called `Flow`, using the Lightning Labs `Pool` software.
-- In charge of developments and maintance of core website API stack using AWS Lambda and AWS SAM.
-- Worked as a team to enable our workloads to be deployed on both AWS EKS and Google GKE clusters.
-- Continually worked to improve our monitoring/alerting capabilities using a self hosted grafana and prometheus stack.
+- Primary developer of "node launcher" website backend, written in Python, using AWS Lambda/SAM for deployment.
+- Worked as a team to enable our customer workloads to be deployed on both AWS EKS and Google GKE clusters.
+- Continually worked to improve our monitoring/alerting capabilities using self-hosted grafana and prometheus stacks.
+- Kept up communications with outside open-source teams to resolve customer issues, and contributed to support efforts for our LND, BTCPay, and LNBits service offerings.
 
 ### Dev Ops | **Biarri Networks**
 *Aug 2020 - Sept 2021*
 
 - Maintained and upgraded our Jenkins CI/CD server
 - Led an effort to migrate our jobs from classic Jenkins to using Jenkinsfiles, which is easier to store as code.
+- Implemented a system upgrade for our high-performance solver servers, minimizing customer downtime, while adhering to strict upgrade requirements.
 ---
 
 ## Skills
@@ -54,37 +55,24 @@ _TODO: Fill me out_
 
 ### **Resume demo project** - [Link to Project](https://github.com/kornpow/get-new-job-project)
 
-An application which leverages skills learned in various previous roles.
+An application which leverages skills learned in various previous roles. Hosted on domain: `https://samkorn.me`
 
 - Create a two node `k3s` cluster with one node in the cloud and one node on-prem at home.
-- Terraform to create the cloud infrastructure and security groups
+- Terraform to create the cloud infrastructure and security groups.
 - Packer to create AMIs which contains the cluster software.
-- A FastAPI web application which converts markdown to HTML and displays.
+- A FastAPI web application which converts markdown to HTML and displays to the screen.
 
-### **Project B** - [Link to Project](https://github.com/kornpow/project-b)
+### **IoT Prometheus Temperature and Humidity Sensor** - [Link to Project](https://github.com/kornpow/project-b)
 
-A mobile app that...
+A MicroPython + hardware project, which communicates to a temperature and humidity sensor.
 
----
-<!-- 
-## Certifications
-
-- **Web Development Certification** - CodeCamp | *June 2019*
-- **AWS Certified Solutions Architect** - Amazon Web Services | *January 2020*
-
---- -->
-
-<!-- ## Languages
-
-- **English**: Native
-- **Spanish**: Fluent
-- **French**: Intermediate
-
---- -->
+- The hardware is a Raspberry Pi Pico W wired to a AM2301 sensor.
+- Runs a webserver on the embedded device, and returns data in prometheus data format.
+- Grafana agent on another device queries the sensor server and sends data to Grafana Cloud where data can be graphed and analyzed.
 
 ## Interests
 
-- Open-source contribution
-- Hiking and outdoor activities
-- Reading tech blogs and staying updated with industry trends
+- Open-source contribution: Testing various Bitcoin/Lightning Network tools and creating issues, talking to developers, etc.
+- Health/Fitness: Hiking, running, lifting, keto diet, and outdoor activities
+- Self-sufficiency: Gourmet Mushroom growing, gardening, soap making
 

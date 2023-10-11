@@ -44,22 +44,22 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 80
 
 ingress:
   enabled: true
   className: "traefik"
-  annotations: {}
-    # cert-manager.io/issuer: "letsencrypt-staging"
+  annotations:
+    cert-manager.io/issuer: "letsencrypt-prod"
   hosts:
     - host: samkorn.xyz
       paths:
         - path: /
           pathType: Prefix
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+   - secretName: samkorn-xyz-tls
+     hosts:
+       - samkorn.xyz
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -85,7 +85,7 @@ volumes:
 - name: usb-lp0
   hostPath:
     path: /dev/usb/lp0
-    # type: CharDevice
+    type: CharDevice
 # - name: foo
 #   secret:
 #     secretName: mysecret
