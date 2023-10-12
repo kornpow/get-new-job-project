@@ -57,16 +57,16 @@ A very motivated engineer, looking to join a team of good people making products
 
 An application which leverages skills learned in various previous roles. Hosted on domain: `https://samkorn.me`
 
-- Create a two node `k3s` cluster with one node in the cloud and one node on-prem at home.
+- Create a two node `k3s` (minified kubernetes) cluster with one node in the cloud and one node on-prem at home.
 - Terraform to create the cloud infrastructure and security groups.
 - Packer to create AMIs which contains the cluster software.
 - A FastAPI web application which converts markdown to HTML and displays to the screen.
 
-### **IoT Prometheus Temperature and Humidity Sensor** - [Link to Project](https://github.com/kornpow/project-b)
+### **IoT Prometheus Temperature and Humidity Sensor** - [Link to Project](https://github.com/kornpow/dht20-prometheus)
 
 A MicroPython + hardware project, which communicates to a temperature and humidity sensor.
 
-- The hardware is a Raspberry Pi Pico W wired to a AM2301 sensor.
+- Hardware is a Raspberry Pi Pico W wired to a AM2301 sensor.
 - Runs a webserver on the embedded device, and returns data in prometheus data format.
 - Grafana agent on another device queries the sensor server and sends data to Grafana Cloud where data can be graphed and analyzed.
 
