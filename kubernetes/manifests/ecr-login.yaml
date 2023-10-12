@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: aws-registry-credential-cron
+spec:
+  schedule: "0 */4 * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2  
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        spec:
+          serviceAccountName: ecr-token-updater
+          restartPolicy: Never
+          nodeSelector:
+            instance: internal
+          containers:
+          - name: kubectl
+            imagePullPolicy: IfNotPresent
+            image: public.ecr.aws/i9m8a4n0/aws-kubectl:latest
+            command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              AWS_REGION=us-west-2
+              DOCKER_REGISTRY_SERVER=https://190928636648.dkr.ecr.${AWS_REGION}.amazonaws.com
+              DOCKER_USER=AWS
+              DOCKER_PASSWORD=$(aws ecr get-login-password --region ${AWS_REGION})
+              kubectl delete secret aws-registry || true
+              kubectl create secret docker-registry aws-registry \
+              --docker-server=$DOCKER_REGISTRY_SERVER \
+              --docker-username=$DOCKER_USER \
+              --docker-password=$DOCKER_PASSWORD \
+              --docker-email=no@email.local
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: default
+  name: ecr-token-updater
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: secret-updater-role
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secret-updater-rolebinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: ecr-token-updater
+  namespace: default
+roleRef:
+  kind: Role
+  name: secret-updater-role
+  apiGroup: rbac.authorization.k8s.io

@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/resume"
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
