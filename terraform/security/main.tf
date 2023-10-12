@@ -105,9 +105,33 @@ resource "aws_iam_role" "cluster_instance_role" {
   })
 }
 
+resource "aws_iam_policy" "cluster_ecr_login_policy" {
+  name        = "cluster_ecr_login_policy"
+  path        = "/"
+  description = "Allows a cronjob in k3s cluster to refresh ECR token"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ecr:GetAuthorizationToken",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
 resource "aws_iam_role_policy_attachment" "ec2_ssm_full_access" {
   role       = aws_iam_role.cluster_instance_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_ecr_token_refresh" {
+  role       = aws_iam_role.cluster_instance_role.name
+  policy_arn = aws_iam_policy.cluster_ecr_login_policy.arn
 }
 
 resource "aws_iam_instance_profile" "cluster_instance_profile" {
