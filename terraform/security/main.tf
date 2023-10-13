@@ -100,10 +100,39 @@ resource "aws_iam_role" "cluster_instance_role" {
         Principal = {
           Service = "ec2.amazonaws.com"
         }
+      },
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::190928636648:user/skorn"
+        },
+        "Action": "sts:AssumeRole"
       }
     ]
   })
 }
+
+# resource "aws_iam_role" "developer_role" {
+#   name = "dev_role"
+
+#   assume_role_policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Action = "sts:AssumeRole"
+#         Effect = "Allow"
+#         Sid    = ""
+#         Principal = {
+#           Service = "ec2.amazonaws.com"
+#         }
+#       },
+#     ]
+#   })
+
+#   tags = {
+#     Name = "dev-role"
+#   }
+# }
 
 resource "aws_iam_policy" "cluster_ecr_login_policy" {
   name        = "cluster_ecr_login_policy"
@@ -116,6 +145,18 @@ resource "aws_iam_policy" "cluster_ecr_login_policy" {
       {
         Action = [
           "ecr:GetAuthorizationToken",
+          "ecr:ListImages",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetRepositoryPolicy",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:DescribeImages",
+          "ecr:BatchGetImage",
+          "ecr:InitiateLayerUpload",
+          "ecr:UploadLayerPart",
+          "ecr:CompleteLayerUpload",
+          "ecr:PutImage"
         ]
         Effect   = "Allow"
         Resource = "*"
