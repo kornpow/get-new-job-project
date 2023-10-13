@@ -3,7 +3,8 @@ kind: CronJob
 metadata:
   name: aws-registry-credential-cron
 spec:
-  schedule: "0 */4 * * *"
+  # schedule: "0 */4 * * *"
+  schedule: "*/1 * * * *"
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 2  
   jobTemplate:
@@ -13,6 +14,7 @@ spec:
         spec:
           serviceAccountName: ecr-token-updater
           restartPolicy: Never
+          # Run on the AWS instance since it has an instanceprofile with the proper role attached
           nodeSelector:
             instance: internal
           containers:
@@ -33,6 +35,7 @@ spec:
               --docker-username=$DOCKER_USER \
               --docker-password=$DOCKER_PASSWORD \
               --docker-email=no@email.local
+              kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -49,6 +52,9 @@ rules:
 - apiGroups: [""]
   resources: ["secrets"]
   verbs: ["create", "delete"]
+- apiGroups: [""]
+  resources: ["serviceaccounts"]
+  verbs: ["get", "patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

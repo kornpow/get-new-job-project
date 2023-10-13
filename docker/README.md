@@ -13,5 +13,5 @@ docker buildx build --platform linux/amd64,linux/arm64 -t public.ecr.aws/i9m8a4n
 ## AWS Kubectl
 This is a simple docker container which has `aws-cli` and `kubectl` installed.
 ```bash
-docker buildx build --platform linux/arm64 -tpublic.ecr.aws/i9m8a4n0/aws-kubectl:latest ecr-login/ --push
+docker buildx build --platform linux/arm64 -t public.ecr.aws/i9m8a4n0/aws-kubectl:latest ecr-login/ --push
 ```

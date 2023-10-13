@@ -40,12 +40,12 @@ spec:
             - containerPort: 8080
           livenessProbe:
             httpGet:
-              path: /printer
+              path: /
               port: 8080
             initialDelaySeconds: 3
           readinessProbe:
             httpGet:
-              path: /printer
+              path: /
               port: 8080
             initialDelaySeconds: 3
           resources:

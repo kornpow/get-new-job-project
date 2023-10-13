@@ -6,9 +6,9 @@ replicaCount: 1
 
 image:
   repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/label-printer"
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "0.0.2"
 
 imagePullSecrets:
   - name: aws-registry
@@ -19,12 +19,12 @@ serviceAccount:
   # Specifies whether a service account should be created
   create: false
   # Automatically mount a ServiceAccount's API credentials?
-  automount: false
+  automount: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "default"
 
 podAnnotations: {}
 podLabels: {}
@@ -51,6 +51,7 @@ ingress:
   className: "traefik"
   annotations:
     cert-manager.io/issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.middlewares: default-stripprefix@kubernetescrd
   hosts:
     - host: samkorn.xyz
       paths:
