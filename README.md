@@ -26,6 +26,10 @@ kubectl delete configmap resume-markdown
 kubectl create configmap resume-markdown --from-file=resume-app/RESUME.md
 ```
 
+```
+kubectl create secret generic lnbits-env --from-file=lnbits/secrets/env-example
+```
+
 
 # Resources
 - git clone https://github.com/askblaker/k3s.rocks.git
