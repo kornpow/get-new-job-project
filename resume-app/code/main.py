@@ -14,3 +14,13 @@ def show_resume(request: Request):
     html_string = markdown.markdown(markdown_string)
 
     return templates.TemplateResponse("resume.html", {"request": request, "resume_body": html_string})
+
+
+@app.get("/other", response_class=HTMLResponse)
+def show_resume(request: Request):
+    with open("OTHER.md", "r") as f:
+        markdown_string = f.read()
+
+    html_string = markdown.markdown(markdown_string)
+
+    return templates.TemplateResponse("resume.html", {"request": request, "resume_body": html_string})
