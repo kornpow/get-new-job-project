@@ -83,12 +83,18 @@ volumes:
 - name: resume-markdown
   configMap:
     name: resume-markdown
+- name: other-markdown
+  configMap:
+    name: other-markdown
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: resume-markdown
   mountPath: /home/appuser/RESUME.md
   subPath: RESUME.md
+- name: other-markdown
+  mountPath: /home/appuser/OTHER.md
+  subPath: OTHER.md
 
 nodeSelector:
   instance: home

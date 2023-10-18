@@ -8,7 +8,7 @@ image:
   repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/label-printer"
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.2"
+  tag: "latest"
 
 imagePullSecrets:
   - name: aws-registry
