@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "lnbits.fullname" . }}
+  labels:
+    {{- include "lnbits.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "lnbits.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "lnbits.labels" . | nindent 8 }}
+	{{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "lnbits.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5000
+          command: ["poetry", "run", "lnbits"]
+          # command: ["sleep"]
+          # args: ["infinity"]
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5000
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5000
+          env:
+          - name: DEBUG
+            value: "true"
+          #   - name: LNBITS_BACKEND_WALLET_CLASS
+          #     value: LndWallet
+          #   - name: LND_GRPC_ENDPOINT
+          #     value: kornpow-store.m.voltageapp.io
+          #   - name: LND_GRPC_PORT
+          #     value: "10009"
+          #   - name: LND_GRPC_MACAROON
+          #     value: /creds/admin.macaroon
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: lnd-creds
+              #     key: admin.macaroon
+            # - name: LND_GRPC_CERT
+            #   value: /creds/tls.cert
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: lnd-creds
+              #     key: tls.cert
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

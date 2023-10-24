@@ -1,3 +1,4 @@
 *.tfvars
 **/.terraform/
 **/__pycache__/
+kubernetes/lnbits/secrets/.env
