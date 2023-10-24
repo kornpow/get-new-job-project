@@ -27,7 +27,19 @@ kubectl create configmap resume-markdown --from-file=resume-app/RESUME.md
 ```
 
 ```
-kubectl create secret generic lnbits-env --from-file=lnbits/secrets/env-example
+kubectl delete secret lnbits-env
+kubectl create secret generic lnbits-env --from-file=lnbits/secrets/.env
+
+kubectl delete secret lnd-creds
+kubectl create secret generic lnd-creds \
+    --from-file=/home/skorn/Documents/creds/kornpow-store/lnd/tls.cert \
+    --from-file=/home/skorn/Documents/creds/kornpow-store/lnd/admin.macaroon
+```
+
+```
+kubectl create secret generic postgres-creds \
+    --from-literal=password=test123 \
+    --from-literal=postgres-password=superadmin123
 ```
 
 

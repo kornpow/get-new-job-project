@@ -8,7 +8,7 @@ image:
   repository: lnbitsdocker/lnbits-legend
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "0.11.1"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -83,15 +83,35 @@ volumes:
   secret:
     secretName: lnbits-env
     optional: false
+- name: lnd-creds
+  secret:
+    secretName: lnd-creds
+    optional: false
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: lnbits-env
   mountPath: "/app/.env"
   subPath: ".env"
+- name: lnd-creds
+  mountPath: "/creds"
+
+  
+
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+
+### Postgres
+postgresql:
+  auth:
+    username: skorn
+    database: lnbits
+    existingSecret: postgres-creds
+  primary:
+    persistence:
+      size: 1Gi

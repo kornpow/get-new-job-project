@@ -39,15 +39,37 @@ spec:
           ports:
             - containerPort: 5000
           command: ["poetry", "run", "lnbits"]
+          # command: ["sleep"]
           # args: ["infinity"]
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 5000
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 5000
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5000
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5000
+          env:
+          - name: DEBUG
+            value: "true"
+          #   - name: LNBITS_BACKEND_WALLET_CLASS
+          #     value: LndWallet
+          #   - name: LND_GRPC_ENDPOINT
+          #     value: kornpow-store.m.voltageapp.io
+          #   - name: LND_GRPC_PORT
+          #     value: "10009"
+          #   - name: LND_GRPC_MACAROON
+          #     value: /creds/admin.macaroon
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: lnd-creds
+              #     key: admin.macaroon
+            # - name: LND_GRPC_CERT
+            #   value: /creds/tls.cert
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: lnd-creds
+              #     key: tls.cert
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}

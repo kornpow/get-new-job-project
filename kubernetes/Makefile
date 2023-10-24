@@ -1,4 +1,4 @@
-.PHONY: labelprinter resume
+.PHONY: labelprinter resume lnbits
 
 labelprinter:
 	helm upgrade --install labelprinter labelprinter/ -f labelprinter/values.yaml
