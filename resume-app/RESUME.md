@@ -9,37 +9,40 @@
 
 ## Education
 
-### Electrical and Computer Engineering W/ Computer Science Minor
-
-**University of Colorado** - Boulder, CO  
+### **University of Colorado** | Boulder, CO
 *August 2012 - May 2016*
+
+- Major: Electrical and Computer Engineering
+- Minor: Computer Science
+
+**Emphasis**: Power Electronics & Human-Centered Design
 
 ---
 
 ## Work Experience
 
-### Backend and Platform | **Voltage Cloud**
-*Sept 2021 - Oct 2023*
+### **Voltage Cloud** | Backend and Platform
+*September 2021 - October 2023*
 
-- Created a Lightning Service Provider tool called `Flow`, using the Lightning Labs `Pool` software.
-- Primary developer of "node launcher" website backend, written in Python, using AWS Lambda/SAM/Cloudformation for deployment.
+- Primary developer of "node launcher" REST API Backend, written in Python, using AWS Lambda/SAM/Cloudformation for deployment.
 - Created a site-to-site VPN between our AWS and GCP datacenters. Designed and managed our employee Wireguard VPN network.
 - Worked as a team to enable our customer kubernetes workloads to be deployed on both AWS EKS and Google GKE clusters.
-- Continually worked to improve our monitoring/alerting capabilities using self-hosted grafana and prometheus stacks.
+- Continually worked to improve our monitoring/alerting capabilities using self-hosted grafana and prometheus stacks, with an eye for creating actionable alerts.
 - Contributed to improving our CI/CD workflows. Created GitHub Actions to run tests, and update cloud configuration parameters. Helped to maintain our ArgoCD deployment infrastructure.
+- Managed the majority of our cloud infrastructure using Terraform, and was constantly looking for opportunities to bring more infrastructure under IaC practices.
 
-### Dev Ops | **Biarri Networks**
-*Aug 2020 - Sept 2021*
+### **Biarri Networks** | DevOps
+*August 2020 - September 2021*
 
 - Maintained and upgraded our Jenkins CI/CD server
-- Led an effort to migrate our jobs from classic Jenkins to using Jenkinsfiles, which is easier to store as code.
+- Led an effort to migrate our jobs from classic Jenkins to using Jenkinsfiles, which is more composable, and easier to audit as code.
 - Implemented a system upgrade for our high-performance solver servers, minimizing customer downtime, while adhering to strict upgrade requirements.
 
-### IoT, Electronics, and Cloud Software | **Babylon Micro-Farms**
-*Aug 2017 - July 2020*
+### **Babylon Micro-Farms** | IoT, Electronics, and Cloud Software
+*August 2017 - July 2020*
 
 - Wrote embedded linux Python code for our farm modules, and managed OTA updates to the devices.
-- Developed a Django based backend API which ingested farm sensor data, and allowed for control of the device using a mobile app.
+- Developed a Django based backend API which ingested farm sensor data, and allowed for control of the device using a React Native mobile app.
 - Though I usually prefer open collaboration if possible, my team was awarded a patent for an automated hydroponics nutrient dosing system: [https://patents.justia.com/patent/20200396917](https://patents.justia.com/patent/20200396917)
 ---
 
@@ -47,8 +50,10 @@
 
 - **Languages**: Python, Go, NodeJS
 - **Tools**: Git, Kubernetes, Terraform, Jenkins, Cloudformation, GitOps, Docker
-- **Databases**: DynamoDB, PostgreSQL
-- **Clouds**: Primarily AWS, some GCP experience
+- **Databases**: DynamoDB, PostgreSQL, Redis
+- **AWS**: Lambda, Route53, Cloudformation, EKS, Cognito, API Gateway, RDS, IAM, S3
+- **GCP**: Artifact Registry, GKE, Compute, HA VPN
+- **IOT**: I2C Protocol, embedded linux, MQTT
 
 ---
 
@@ -65,20 +70,18 @@ An application which leverages skills learned in various previous roles. Hosted 
     - LNBits payment gateway: [https://lnbits.lightningspore.com](https://lnbits.lightningspore.com)
     - IoT Label Printer: [https://samkorn.xyz/labelprinter](https://samkorn.xyz/labelprinter)
 
-GitHub Link -> [https://github.com/kornpow/get-new-job-project](https://github.com/kornpow/get-new-job-project)
+GitHub Link ➔ [https://github.com/kornpow/get-new-job-project](https://github.com/kornpow/get-new-job-project)
 
-
-### **IoT Prometheus Temperature and Humidity Sensor** - 
+### **IoT Prometheus Temperature and Humidity Sensor**
 A MicroPython + hardware project, which communicates to a temperature and humidity sensor.
 
 - Hardware is a Raspberry Pi Pico W wired to a AM2301 sensor.
 - Runs a webserver on the embedded device, and returns data in prometheus data format.
 - Grafana agent on another device queries the sensor server and sends data to Grafana Cloud where data can be graphed and analyzed.
 
-GitHub Link -> [https://github.com/kornpow/dht20-prometheus](https://github.com/kornpow/dht20-prometheus)
+GitHub Link ➔ [https://github.com/kornpow/dht20-prometheus](https://github.com/kornpow/dht20-prometheus)
 
 ## Interests
-
 - Open-source contribution: Testing various Bitcoin/Lightning Network tools and creating issues, talking to developers, etc.
 - Health/Fitness: Running, lifting, keto diet, and outdoor activities
 - Self-sufficiency: Gourmet mushroom growing, gardening, brewing, soap making

@@ -41,14 +41,14 @@ spec:
           command: ["poetry", "run", "lnbits"]
           # command: ["sleep"]
           # args: ["infinity"]
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5000
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
           env:
           - name: DEBUG
             value: "true"
