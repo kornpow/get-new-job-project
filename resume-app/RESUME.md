@@ -19,11 +19,23 @@
 
 ---
 
+## Skills
+
+- **Languages**: Python, Go, NodeJS, C#
+- **Tools**: Git, Kubernetes, Terraform, Jenkins, Cloudformation, GitOps, Docker
+- **Databases**: DynamoDB, PostgreSQL, Redis
+- **AWS**: Lambda, Route53, Cloudformation, EKS, Cognito, API Gateway, RDS, IAM, S3
+- **GCP**: Artifact Registry, GKE, Compute, HA VPN
+- **IOT**: I2C Protocol, embedded linux, MQTT
+- **Electrical**: Altium, KiCAD, PCB Design
+---
+
 ## Work Experience
 
 ### **Voltage Cloud** | Backend and Platform
 *September 2021 - October 2023*
 
+- Created a custom payment, credit, and invoicing system, which allowed customers to pay using Bitcoin or USD using the Stripe SDK.
 - Primary developer of "node launcher" REST API Backend, written in Python, using AWS Lambda/SAM/Cloudformation for deployment.
 - Created a site-to-site VPN between our AWS and GCP datacenters. Designed and managed our employee Wireguard VPN network.
 - Worked as a team to enable our customer kubernetes workloads to be deployed on both AWS EKS and Google GKE clusters.
@@ -34,8 +46,9 @@
 ### **Biarri Networks** | DevOps
 *August 2020 - September 2021*
 
-- Maintained and upgraded our Jenkins CI/CD server
+- Maintained and upgraded our Jenkins CI/CD server.
 - Led an effort to migrate our jobs from classic Jenkins to using Jenkinsfiles, which is more composable, and easier to audit as code.
+- Improved internal tools to improve data-flow to leadership and managers.
 - Implemented a system upgrade for our high-performance solver servers, minimizing customer downtime, while adhering to strict upgrade requirements.
 
 ### **Babylon Micro-Farms** | IoT, Electronics, and Cloud Software
@@ -43,17 +56,16 @@
 
 - Wrote embedded linux Python code for our farm modules, and managed OTA updates to the devices.
 - Developed a Django based backend API which ingested farm sensor data, and allowed for control of the device using a React Native mobile app.
+- Developed a label printing system, which allowed for tracking physical plant seed pods to info in a database.
 - Though I usually prefer open collaboration if possible, my team was awarded a patent for an automated hydroponics nutrient dosing system: [https://patents.justia.com/patent/20200396917](https://patents.justia.com/patent/20200396917)
----
 
-## Skills
+### **Canvas Technology** | Electrical Engineer
+*June 2016 - July 2017*
 
-- **Languages**: Python, Go, NodeJS
-- **Tools**: Git, Kubernetes, Terraform, Jenkins, Cloudformation, GitOps, Docker
-- **Databases**: DynamoDB, PostgreSQL, Redis
-- **AWS**: Lambda, Route53, Cloudformation, EKS, Cognito, API Gateway, RDS, IAM, S3
-- **GCP**: Artifact Registry, GKE, Compute, HA VPN
-- **IOT**: I2C Protocol, embedded linux, MQTT
+- Installed hardware and software onto high performance PCs, which was the brain of an autonomous warehouse vehicle.
+- Collaborated with team members in our software, electrical, and mechanical teams to develop a new embedded architecture, which allowed for simpler communication and wiring.
+- Created a test rig in C#, which tested the operation of an embedded-system wheel assembly.
+- Designed and iterated on a variety of PCBs, created BOMs, and did small/medium scale assembly in a in-lab pick and place machine.
 
 ---
 
