@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/resume"
+  # repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/resume"
+  repository: nginx
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -86,6 +87,10 @@ volumes:
 - name: other-markdown
   configMap:
     name: other-markdown
+- name: html-volume
+  configMap:
+    name: nginx-html
+
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
@@ -95,6 +100,8 @@ volumeMounts:
 - name: other-markdown
   mountPath: /home/appuser/OTHER.md
   subPath: OTHER.md
+- name: html-volume
+  mountPath: /usr/share/nginx/html
 
 nodeSelector:
   instance: home
