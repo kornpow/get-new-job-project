@@ -21,3 +21,4 @@ This is a simple docker container which has `aws-cli` and `kubectl` installed.
 docker buildx build --platform linux/arm64 -t public.ecr.aws/i9m8a4n0/aws-kubectl:latest ecr-login/ --push
 ```
 
+## label printer

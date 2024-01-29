@@ -47,3 +47,12 @@ spec:
   stripPrefix:
     prefixes:
       - /labelprinter
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: stripprefixpixel
+spec:
+  stripPrefix:
+    prefixes:
+      - /pixel-promo

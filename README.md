@@ -44,6 +44,9 @@ kubectl create secret generic postgres-creds \
     --from-literal=postgres-password=superadmin123
 ```
 
+kubectl create secret generic pixel-promo-dotenv \
+    --from-file=/Users/samkorn/Documents/repos/satoshis-ads/app/.env
+
 
 # Resources
 - git clone https://github.com/askblaker/k3s.rocks.git
