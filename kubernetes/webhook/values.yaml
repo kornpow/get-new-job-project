@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/pixel-promo"
+  repository: "190928636648.dkr.ecr.us-west-2.amazonaws.com/lightningspore-webhook"
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -33,8 +33,8 @@ podSecurityContext: {}
   # privileged: true
   # fsGroup: 2000
 
-securityContext:
-  privileged: true
+securityContext: {}
+#  privileged: true
   # capabilities:
   #   drop:
   #   - ALL
@@ -51,16 +51,16 @@ ingress:
   className: "traefik"
   annotations:
     cert-manager.io/issuer: "letsencrypt-prod"
-    # traefik.ingress.kubernetes.io/router.middlewares: default-stripprefixpixel@kubernetescrd
+    #traefik.ingress.kubernetes.io/router.middlewares: default-stripprefix@kubernetescrd
   hosts:
-    - host: pixel.promo
+    - host: webhook.samkorn.xyz
       paths:
         - path: /
           pathType: Prefix
   tls:
-   - secretName: pixel-promo-tls
+   - secretName: webhook-samkorn-xyz-tls
      hosts:
-       - pixel.promo
+       - webhook.samkorn.xyz
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -85,20 +85,14 @@ autoscaling:
 volumes:
 - name: config
   secret:
-    secretName: pixel-promo-dotenv
+    secretName: webhook-dotenv
     optional: false
-- name: sqlite-db
-  persistentVolumeClaim:
-    claimName: sqlite-db-claim
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: config
   mountPath: "/mnt/config"
   readOnly: true
-- name: sqlite-db
-  mountPath: "/var/lib/sqlite"
-  readOnly: false
 
 nodeSelector:
   instance: home

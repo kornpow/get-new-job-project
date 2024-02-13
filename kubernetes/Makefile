@@ -1,4 +1,4 @@
-.PHONY: labelprinter resume lnbits pixelpromo
+.PHONY: labelprinter resume lnbits pixelpromo webhook
 
 labelprinter:
 	helm upgrade --install labelprinter labelprinter/ -f labelprinter/values.yaml
@@ -11,3 +11,6 @@ lnbits:
 
 pixelpromo:
 	helm upgrade --install pixel-promo pixel-promo/ -f pixel-promo/values.yaml
+
+webhook:
+	helm upgrade --install webhook webhook/ -f webhook/values.yaml

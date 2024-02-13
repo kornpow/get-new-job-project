@@ -44,8 +44,14 @@ kubectl create secret generic postgres-creds \
     --from-literal=postgres-password=superadmin123
 ```
 
+```
 kubectl create secret generic pixel-promo-dotenv \
     --from-file=/Users/samkorn/Documents/repos/satoshis-ads/app/.env
+
+kubectl create secret generic webhook-dotenv \
+    --from-file=/Users/samkorn/Documents/repos/lightningspore-monorepo/lightningspore_code/webhook/.env
+```
+
 
 
 # Resources
