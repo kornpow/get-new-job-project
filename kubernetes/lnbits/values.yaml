@@ -9,7 +9,7 @@ image:
   repository: 190928636648.dkr.ecr.us-west-2.amazonaws.com/lnbits-legend
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.12.1"
+  tag: "0.12.2"
   #tag: 22ea83e843fe5b050c32cc4ace4516ea80fe7591
 
 imagePullSecrets: []
