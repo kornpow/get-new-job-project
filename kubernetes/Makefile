@@ -1,4 +1,4 @@
-.PHONY: labelprinter resume lnbits pixelpromo webhook
+.PHONY: labelprinter resume lnbits pixelpromo webhook coracle
 
 labelprinter:
 	helm upgrade --install labelprinter labelprinter/ -f labelprinter/values.yaml
@@ -14,3 +14,6 @@ pixelpromo:
 
 webhook:
 	helm upgrade --install webhook webhook/ -f webhook/values.yaml
+
+coracle:
+	helm upgrade --install coracle coracle/ -f coracle/values.yaml
