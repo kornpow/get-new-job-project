@@ -9,10 +9,11 @@ image:
   repository: 190928636648.dkr.ecr.us-west-2.amazonaws.com/lnbits-legend
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.12.2"
+  tag: "0.12.4"
   #tag: 22ea83e843fe5b050c32cc4ace4516ea80fe7591
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: aws-registry
 nameOverride: ""
 fullnameOverride: ""
 
@@ -99,9 +100,12 @@ volumeMounts:
   mountPath: "/creds"
 
   
-
-
+# must be "home" since the PV is on home
 nodeSelector: {}
+# nodeSelector:
+#   location: sporehome
+#   instance: home
+
 
 tolerations: []
 
@@ -117,3 +121,9 @@ postgresql:
   primary:
     persistence:
       size: 1Gi
+
+    # nodeSelector:
+    #   instance: home
+    #   location: sporehome
+
+

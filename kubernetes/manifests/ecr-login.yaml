@@ -19,7 +19,7 @@ spec:
             instance: internal
           containers:
           - name: kubectl
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             image: public.ecr.aws/i9m8a4n0/aws-kubectl:latest
             command:
             - "/bin/sh"
@@ -35,7 +35,7 @@ spec:
               --docker-username=$DOCKER_USER \
               --docker-password=$DOCKER_PASSWORD \
               --docker-email=no@email.local
-              kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
+               kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -51,7 +51,7 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
-  verbs: ["create", "delete"]
+  verbs: ["create", "delete", "patch", "get", "list"]
 - apiGroups: [""]
   resources: ["serviceaccounts"]
   verbs: ["get", "patch"]

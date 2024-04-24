@@ -12,6 +12,9 @@ spec:
       access:
         enabled: true
 
+    nodeSelector:
+      instance: internal
+
     #dashboard:
     #  enabled: true
 

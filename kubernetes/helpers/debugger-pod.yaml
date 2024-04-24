@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubectl-pod
+  labels:
+    purpose: aws-kubectl-infinite-sleep
+spec:
+  containers:
+  - name: aws-kubectl
+    image: public.ecr.aws/i9m8a4n0/debugger:latest
+    command: ["sh", "-c", "sleep infinity"]
+  nodeSelector:
+    instance: internal

@@ -17,4 +17,6 @@ COPY --from=builder /usr/local/bin/aws /usr/local/bin/aws
 COPY --from=builder /usr/local/bin/aws_completer /usr/local/bin/aws_completer
 COPY --from=builder /kubectl /usr/local/bin/kubectl
 
+RUN apt update && apt install curl unzip telnet net-tools -y
+
 ENV PATH="/usr/local/aws-cli/v2/current/dist:${PATH}"
