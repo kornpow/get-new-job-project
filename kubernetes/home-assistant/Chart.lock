@@ -1,0 +1,6 @@
+dependencies:
+- name: home-assistant
+  repository: https://charts.alekc.dev
+  version: 0.15.0
+digest: sha256:bc7f21a0bb136c56d7274eb2a394f096adc3b03bfff01f57730e725cc3b6836a
+generated: "2024-04-29T14:41:18.103198-06:00"

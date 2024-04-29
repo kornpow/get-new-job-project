@@ -1,4 +1,4 @@
-.PHONY: labelprinter resume lnbits pixelpromo webhook coracle bostr
+.PHONY: labelprinter resume lnbits pixelpromo webhook coracle bostr homeassistant
 
 labelprinter:
 	helm upgrade --install labelprinter labelprinter/ -f labelprinter/values.yaml
@@ -20,3 +20,6 @@ coracle:
 
 bostr:
 	helm upgrade --install bostr bostr/ -f bostr/values.yaml
+
+homeassistant:
+	helm upgrade --install home-assistant home-assistant/ -f home-assistant/values.yaml
