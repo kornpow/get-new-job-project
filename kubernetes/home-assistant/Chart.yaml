@@ -25,6 +25,7 @@ appVersion: "2024.4.4"
 
 
 dependencies:
+  # REPO: https://gitlab.com/alexander-chernov/helm/home-assistant
   - name: home-assistant
     version: 0.15.0
     repository: https://charts.alekc.dev
