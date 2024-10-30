@@ -101,7 +101,7 @@ volumeMounts: []
 #   readOnly: true
 
 nodeSelector:
-  instance: ai-box
+  instance: home
   location: sporehome
 
 tolerations: []

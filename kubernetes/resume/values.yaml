@@ -104,7 +104,7 @@ volumeMounts:
   mountPath: /usr/share/nginx/html
 
 nodeSelector:
-  instance: ai-box
+  instance: home
   location: sporehome
 
 tolerations: []
