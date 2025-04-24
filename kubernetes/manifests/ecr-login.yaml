@@ -17,6 +17,11 @@ spec:
           # Run on the AWS instance since it has an instanceprofile with the proper role attached
           nodeSelector:
             instance: internal
+          dnsPolicy: "ClusterFirst"
+          dnsConfig:
+            nameservers:
+              - "8.8.8.8"
+              - "169.254.169.253"
           containers:
           - name: kubectl
             imagePullPolicy: Always
