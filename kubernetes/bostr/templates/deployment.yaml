@@ -36,21 +36,27 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # command: ["/bin/sh"]
+          # args: ["-c", "sleep infinity"]
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: 80
               # name: http
               # hostPort: 8000
               # protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 5000
-            initialDelaySeconds: 1
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 5000
-            initialDelaySeconds: 2
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5000
+          #   initialDelaySeconds: 1
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5000
+          #   initialDelaySeconds: 2
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}

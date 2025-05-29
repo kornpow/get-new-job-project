@@ -23,3 +23,6 @@ bostr:
 
 homeassistant:
 	helm upgrade --install home-assistant home-assistant/ -f home-assistant/values.yaml
+
+wordpress:
+	helm upgrade --install wordpress wordpress/ -f home-assistant/values.yaml

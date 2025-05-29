@@ -11,6 +11,11 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
+# Environment variables to be passed to the container
+env:
+  - name: BOSTR_CONFIG_PATH
+    value: "/usr/src/app/config/config.js"
+
 imagePullSecrets:
   - name: aws-registry
 nameOverride: ""
@@ -80,10 +85,10 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: resume-markdown
-#   configMap:
-#     name: resume-markdown
+volumes:
+- name: app-config
+  configMap:
+    name: app-config
 # - name: other-markdown
 #   configMap:
 #     name: other-markdown
@@ -93,18 +98,18 @@ volumes: []
 
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: resume-markdown
-#   mountPath: /home/appuser/RESUME.md
-#   subPath: RESUME.md
+volumeMounts:
+- name: app-config
+  mountPath: /usr/src/app/config/config.js
+  subPath: config.js
 # - name: other-markdown
 #   mountPath: /home/appuser/OTHER.md
 #   subPath: OTHER.md
 # - name: html-volume
 #   mountPath: /usr/share/nginx/html
 
-nodeSelector:
-  instance: home
+nodeSelector: {}
+  # instance: home
 
 tolerations: []
 
