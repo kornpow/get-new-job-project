@@ -95,7 +95,7 @@ volumeMounts:
   readOnly: true
 
 nodeSelector:
-  instance: home
+  instance: laptop
 
 tolerations: []
 
