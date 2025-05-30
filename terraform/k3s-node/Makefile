@@ -1,4 +1,10 @@
-.PHONY: apply
+.PHONY: init plan apply
+
+init:
+	tofu init -reconfigure
+
+plan:
+	tofu plan -var-file=app.tfvars
 
 apply:
-	terraform apply -var-file=../app.tfvars
+	tofu apply -var-file=app.tfvars

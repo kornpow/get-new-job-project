@@ -1,0 +1,4 @@
+vpc_id = "vpc-abc123"
+# debian
+ami_server = "ami-01e873d494ab8d011"
+ssh_key_name = ""
