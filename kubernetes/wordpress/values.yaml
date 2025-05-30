@@ -1,12 +1,7 @@
 wordpress:
   wordpressUsername: admin
   wordpressPassword: your-secure-password
-  wordpressEmail: admin@example.com
-  wordpressFirstName: Admin
-  wordpressLastName: User
-  wordpressBlogName: My Blog
   
-  # Change service type to ClusterIP (default)
   service:
     type: ClusterIP
     port: 80
@@ -17,29 +12,14 @@ wordpress:
     ingressClassName: "traefik"
     hostname: dev.lightningspore.com
     annotations:
-      cert-manager.io/issuer: "letsencrypt-prod"
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
       traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
       traefik.ingress.kubernetes.io/router.priority: "100"
-    tls: false
-    extraTls:
-      - hosts:
-          - dev.lightningspore.com
-        secretName: dev.lightningspore.com-tls
-
-    # enabled: true
-    # className: "traefik"
-    # annotations:
-    #   cert-manager.io/issuer: "letsencrypt-prod"
-    # hosts:
-    #   - host: lnbits.lightningspore.com
-    #     paths:
-    #       - path: /
-    #         pathType: Prefix
-    # tls:
-    # - secretName: lnbits-lightningspore-tls
-    #   hosts:
-    #     - lnbits.lightningspore.com
-
+    tls: true
+    # extraTls:
+    #   - hosts:
+    #       - dev.lightningspore.com
+    #     secretName: dev.lightningspore.com-tls
     
   persistence:
     enabled: true
@@ -53,14 +33,14 @@ wordpress:
       cpu: 500m
       memory: 512Mi
 
-mysql:
-  auth:
-    rootPassword: mysql-root-password
-    database: bitnami_wordpress
-    username: bn_wordpress
-    password: mysql-user-password
-  
-  primary:
-    persistence:
-      enabled: true
-      size: 5Gi
+  mariadb:
+    auth:
+      rootPassword: mysql-root-password
+      database: bitnami_wordpress
+      username: bn_wordpress
+      password: mysql-user-password
+    
+    primary:
+      persistence:
+        enabled: true
+        size: 5Gi

@@ -1,0 +1,9 @@
+wordpress:
+  # Configure Ingress for Traefik
+  ingress:
+    enabled: true
+    hostname: staging.lightningspore.com
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+      traefik.ingress.kubernetes.io/router.priority: "100"
+    tls: true

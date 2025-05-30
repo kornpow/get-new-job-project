@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"cert-manager.io/v1","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-prod","namespace":"default"},"spec":{"acme":{"email":"korn94sam@gmail.com","privateKeySecretRef":{"name":"letsencrypt-prod"},"server":"https://acme-v02.api.letsencrypt.org/directory","solvers":[{"http01":{"ingress":{"ingressClassName":"traefik"}}}]}}}
+  creationTimestamp: "2023-10-10T21:54:19Z"
+  generation: 1
+  name: letsencrypt-prod
+  namespace: default
+  resourceVersion: "1297"
+  uid: 3d0a53d1-72a3-4bf9-8f83-dcfcc4fad9b6
+spec:
+  acme:
+    email: korn94sam@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: traefik

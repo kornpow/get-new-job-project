@@ -1,4 +1,4 @@
-.PHONY: labelprinter resume lnbits pixelpromo webhook coracle bostr homeassistant wordpress
+.PHONY: labelprinter resume lnbits pixelpromo webhook coracle bostr homeassistant wordpress-dev wordpress-staging
 
 labelprinter:
 	helm upgrade --install labelprinter labelprinter/ -f labelprinter/values.yaml
@@ -24,5 +24,10 @@ bostr:
 homeassistant:
 	helm upgrade --install home-assistant home-assistant/ -f home-assistant/values.yaml
 
-wordpress:
+wordpress-dev:
 	helm upgrade --install spore-press wordpress/ -f wordpress/values.yaml
+
+wordpress-staging:
+	helm upgrade --install -n lnspore \
+	wordpress-staging wordpress/ \
+	-f wordpress/values.yaml -f wordpress/values-staging.yaml
