@@ -49,7 +49,7 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-    cert-manager.io/issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - host: samkorn.me
       paths:
@@ -77,12 +77,6 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes:
-- name: resume-markdown
-  configMap:
-    name: resume-markdown
-- name: other-markdown
-  configMap:
-    name: other-markdown
 - name: html-volume
   configMap:
     name: nginx-html
@@ -90,18 +84,10 @@ volumes:
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
-- name: resume-markdown
-  mountPath: /home/appuser/RESUME.md
-  subPath: RESUME.md
-- name: other-markdown
-  mountPath: /home/appuser/OTHER.md
-  subPath: OTHER.md
 - name: html-volume
   mountPath: /usr/share/nginx/html
 
 nodeSelector: {}
-  # instance: home
-  # location: sporehome
 
 tolerations: []
 
@@ -117,4 +103,6 @@ affinity:
         - key: instance
           operator: In
           values:
+          - beelink1
           - beelink2
+          - laptop

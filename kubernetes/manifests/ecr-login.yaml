@@ -34,13 +34,33 @@ spec:
               DOCKER_REGISTRY_SERVER=https://190928636648.dkr.ecr.${AWS_REGION}.amazonaws.com
               DOCKER_USER=AWS
               DOCKER_PASSWORD=$(aws ecr get-login-password --region ${AWS_REGION})
-              kubectl delete secret aws-registry || true
-              kubectl create secret docker-registry aws-registry \
+              
+              # Update default namespace
+              kubectl delete secret aws-registry -n default || true
+              kubectl create secret docker-registry aws-registry -n default \
               --docker-server=$DOCKER_REGISTRY_SERVER \
               --docker-username=$DOCKER_USER \
               --docker-password=$DOCKER_PASSWORD \
               --docker-email=no@email.local
-               kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
+              kubectl patch serviceaccount default -n default -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
+              
+              # Update lnspore namespace
+              kubectl delete secret aws-registry -n lnspore || true
+              kubectl create secret docker-registry aws-registry -n lnspore \
+              --docker-server=$DOCKER_REGISTRY_SERVER \
+              --docker-username=$DOCKER_USER \
+              --docker-password=$DOCKER_PASSWORD \
+              --docker-email=no@email.local
+              kubectl patch serviceaccount default -n lnspore -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
+              
+              # Update kornpow namespace
+              kubectl delete secret aws-registry -n kornpow || true
+              kubectl create secret docker-registry aws-registry -n kornpow \
+              --docker-server=$DOCKER_REGISTRY_SERVER \
+              --docker-username=$DOCKER_USER \
+              --docker-password=$DOCKER_PASSWORD \
+              --docker-email=no@email.local
+              kubectl patch serviceaccount default -n kornpow -p '{"imagePullSecrets":[{"name":"aws-registry"}]}'
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -62,10 +82,64 @@ rules:
   verbs: ["get", "patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: lnspore
+  name: secret-updater-role
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "delete", "patch", "get", "list"]
+- apiGroups: [""]
+  resources: ["serviceaccounts"]
+  verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: kornpow
+  name: secret-updater-role
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "delete", "patch", "get", "list"]
+- apiGroups: [""]
+  resources: ["serviceaccounts"]
+  verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: secret-updater-rolebinding
   namespace: default
+subjects:
+- kind: ServiceAccount
+  name: ecr-token-updater
+  namespace: default
+roleRef:
+  kind: Role
+  name: secret-updater-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secret-updater-rolebinding
+  namespace: lnspore
+subjects:
+- kind: ServiceAccount
+  name: ecr-token-updater
+  namespace: default
+roleRef:
+  kind: Role
+  name: secret-updater-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secret-updater-rolebinding
+  namespace: kornpow
 subjects:
 - kind: ServiceAccount
   name: ecr-token-updater

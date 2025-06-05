@@ -44,3 +44,11 @@ wordpress:
       persistence:
         enabled: true
         size: 5Gi
+
+    resources:
+      requests:
+        cpu: 1000m
+        memory: 512Mi
+      limits:
+        cpu: 2000m
+        memory: 1024Mi

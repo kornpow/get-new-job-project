@@ -36,15 +36,8 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
 
 securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -54,7 +47,7 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-    cert-manager.io/issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - host: bostr.lightningspore.com
       paths:
@@ -89,28 +82,29 @@ volumes:
 - name: app-config
   configMap:
     name: app-config
-# - name: other-markdown
-#   configMap:
-#     name: other-markdown
-# - name: html-volume
-#   configMap:
-#     name: nginx-html
-
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: app-config
   mountPath: /usr/src/app/config/config.js
   subPath: config.js
-# - name: other-markdown
-#   mountPath: /home/appuser/OTHER.md
-#   subPath: OTHER.md
-# - name: html-volume
-#   mountPath: /usr/share/nginx/html
 
 nodeSelector: {}
-  # instance: home
 
 tolerations: []
 
-affinity: {}
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: location
+          operator: In
+          values:
+          - sporehome
+        - key: instance
+          operator: In
+          values:
+          - beelink1
+          - beelink2
+          - laptop
